@@ -1,10 +1,10 @@
-# Maintainer: Daniel Karmark <>
+# Maintainer: Daniel Karmark <23729961 [plus] nolltre [at] users [dot] noreply [dot] github [dot] com>
 
 pkgname=satpi-git
 pkgver=V1.6.2.alpha.r120.gb5a2a54
 pkgrel=1
 pkgdesc="A SAT>IP server for linux, suitable for running on an Raspberry Pi, VU+, GigaBlue or any other linux box."
-arch=('x86_64' 'armv7h')
+arch=('x86_64' 'i686' 'arm' 'armv6h' 'armv7h')
 url="https://github.com/Barracuda09/SATPI"
 license=('GPL2')
 provides=('satpi')
