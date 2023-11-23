@@ -1,14 +1,14 @@
-# AUR/PKGBUILDs
+# Collection of `PKGBUILDs`
 
-This is a collection of PKGBUILDs that may end up in the AUR registry (depending on whether I want to maintain them or not)
+This is a collection of `PKGBUILD` files (and patches) for various projects that were unavailable in the Arch User Repository (AUR).
 
 ## Currently available
 - [Satpi](satpi/) from [Barracuda09](https://github.com/Barracuda09/SATPI)
 
 ## To build
-- Clone this repo
+- Clone this repository
 - Change directory into whichever package you want to build
-- Run `makepkg`
-- Install with `pacman -U <pkgname>`
+- Run `makepkg -s` to install build dependencies
+- Install with `sudo pacman -U <pkgname>`
 
-Alternatively, build and install in one go with `makepkg -si`
+You can also build and install in one go with `makepkg -si`

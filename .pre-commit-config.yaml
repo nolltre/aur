@@ -1,0 +1,9 @@
+---
+fail_fast: true
+
+repos:
+  - repo: https://github.com/errata-ai/vale
+    rev: v2.29.7
+    hooks:
+      - id: vale
+        exclude: .vale.ini
