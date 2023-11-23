@@ -1,0 +1,36 @@
+# Maintainer: Daniel Karmark <>
+
+pkgname=satpi-git
+pkgver=V1.6.2.alpha.r120.gb5a2a54
+pkgrel=1
+pkgdesc="A SAT>IP server for linux, suitable for running on an Raspberry Pi, VU+, GigaBlue or any other linux box."
+arch=('x86_64' 'armv7h')
+url="https://github.com/Barracuda09/SATPI"
+license=('GPL2')
+provides=('satpi')
+makedepends=('git')
+depends=('glibc' 'gcc-libs' 'libdvbcsa')
+source=('git+https://github.com/Barracuda09/SATPI.git' 'makeflags.patch')
+install='satpi.install'
+sha256sums=('SKIP'
+	'a1c8438f04021b4b5ade81cf1233b5950414f2776295f9c9ec5bcca92e3fb2ed')
+
+prepare() {
+	cd "$srcdir/SATPI"
+	patch --forward --strip=1 --input="${srcdir}/makeflags.patch"
+}
+
+build() {
+	cd "$srcdir/SATPI"
+	make LIBDVBCSA=yes
+}
+
+pkgver() {
+	cd "${srcdir}/SATPI"
+	git describe --long --tags --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+package() {
+	cd "$srcdir/SATPI"
+	make LIBDVBCSA=yes DESTDIR="$pkgdir/" PREFIX="usr/" install
+}

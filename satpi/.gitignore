@@ -1,0 +1,6 @@
+# Directories that'll be created when makepkg is run
+SATPI/
+pkg/
+src/
+# Package
+satpi-git.*

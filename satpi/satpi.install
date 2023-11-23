@@ -1,0 +1,9 @@
+post_install() {
+	echo "Enabling the satpi service"
+	/usr/bin/systemctl enable --now satpi
+}
+
+pre_remove() {
+	echo "Disabling the satpi service"
+	/usr/bin/systemctl disable --now satpi
+}

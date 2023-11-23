@@ -1,0 +1,72 @@
+diff --git a/Makefile b/Makefile
+index 439a88d..fa04050 100755
+--- a/Makefile
++++ b/Makefile
+@@ -16,6 +16,7 @@ RESULT_HAS_BACKTRACE_FUNCTIONS := $(shell $(CXX) -o backtrace checks/backtrace.c
+ # Includes needed for proper compilation
+ INCLUDES +=
+ 
++MAKEFLAGS += -j$(shell nproc)
+ LDFLAGS += $(CPU_FLAGS)
+ CFLAGS += $(CPU_FLAGS)
+ CFLAGS_NEW += $(CPU_FLAGS)
+@@ -230,29 +231,29 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
+ 
+ # Create debug versions
+ debug:
+-	$(MAKE) "BUILD=debug"
++	$(MAKE) $(MAKEFLAGS) "BUILD=debug"
+ 
+ debug1:
+-	$(MAKE) "BUILD=debug1" LIBDVBCSA=yes
++	$(MAKE) $(MAKEFLAGS) "BUILD=debug1" LIBDVBCSA=yes
+ 
+ speed:
+-	$(MAKE) "BUILD=speed" LIBDVBCSA=yes
++	$(MAKE) $(MAKEFLAGS) "BUILD=speed" LIBDVBCSA=yes
+ 
+ # Create a 'simulation' version
+ simu:
+-	$(MAKE) "BUILD=simu"
++	$(MAKE) $(MAKEFLAGS) "BUILD=simu"
+ 
+ # Create a 'test suite' Compile
+ testsuite:
+-	$(MAKE) clean
+-	$(MAKE) debug LIBDVBCSA=yes
+-	$(MAKE) clean
+-	$(MAKE) debug
+-	$(MAKE) clean
+-	$(MAKE) LIBDVBCSA=yes
+-	$(MAKE) clean
+-	$(MAKE)
+-	$(MAKE) clean
++	$(MAKE) $(MAKEFLAGS) clean
++	$(MAKE) $(MAKEFLAGS) debug LIBDVBCSA=yes
++	$(MAKE) $(MAKEFLAGS) clean
++	$(MAKE) $(MAKEFLAGS) debug
++	$(MAKE) $(MAKEFLAGS) clean
++	$(MAKE) $(MAKEFLAGS) LIBDVBCSA=yes
++	$(MAKE) $(MAKEFLAGS) clean
++	$(MAKE) $(MAKEFLAGS)
++	$(MAKE) $(MAKEFLAGS) clean
+ 
+ # Install Doxygen and Graphviz/dot
+ # sudo apt-get install graphviz doxygen
+@@ -309,11 +310,11 @@ install: $(EXECUTABLE)
+ 	mkdir -p $(DESTDIR)$(PREFIX)/bin
+ 	cp $< $(DESTDIR)$(PREFIX)/bin/$(EXECUTABLE)
+ # install systemd file
+-	mkdir -p $(DESTDIR)/lib/systemd/system
+-	cp data/satpi.service $(DESTDIR)/lib/systemd/system
+-# install web data
+-	mkdir -p $(DESTDIR)/usr/share/satpi/web
+-	cp -r web/*  $(DESTDIR)/usr/share/satpi/web
++	mkdir -p $(DESTDIR)$(PREFIX)/lib/systemd/system
++	cp data/satpi.service $(DESTDIR)$(PREFIX)/lib/systemd/system
++# install web dataaa
++	mkdir -p $(DESTDIR)$(PREFIX)/share/satpi/web
++	cp -r web/*  $(DESTDIR)$(PREFIX)/share/satpi/web
+ # create data dir
+ 	mkdir -p $(DESTDIR)/var/lib/satpi
+ 
